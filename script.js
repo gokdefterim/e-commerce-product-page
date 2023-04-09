@@ -24,6 +24,12 @@ function product (){
         number : 'number',
         add : 'add',
         badge : 'badge',
+        rightButton : 'right-button',
+        leftButton : 'left-button',
+        slide : 'slide',
+        popupShadow : 'popup-shadow',
+        popupContainer : 'popup-container',
+        close : 'close',
     }
 
     var selectors = {};
@@ -32,63 +38,30 @@ function product (){
         selectors[key] = '.' + classes[key];
     });
 
+    var badge = 0;
+    var count = 0;
+    var counter = 0;
+
     $(selectors.photo1).click(function() {
-        $(selectors.bigPhoto).css('background-image', 'url(images/image-product-1.jpg)');
-        
-        $(selectors.photo1Img).css('opacity', 0.5);
-        $(selectors.photo2Img).css('opacity', 1);
-        $(selectors.photo3Img).css('opacity', 1);
-        $(selectors.photo4Img).css('opacity', 1);
-        
-        $(selectors.photo1).css('border', '2px solid #ff7d1a');
-        $(selectors.photo2).css('border', 'none');
-        $(selectors.photo3).css('border', 'none');
-        $(selectors.photo4).css('border', 'none');
+        counter = 0;
+        changes();
+        console.log(counter);
     });
     $(selectors.photo2).click(function() {
-        $(selectors.bigPhoto).css('background-image', 'url(images/image-product-2.jpg)');
-        
-        $(selectors.photo1Img).css('opacity', 1);
-        $(selectors.photo2Img).css('opacity', 0.5);
-        $(selectors.photo3Img).css('opacity', 1);
-        $(selectors.photo4Img).css('opacity', 1);
-        
-        $(selectors.photo2).css('border', '2px solid #ff7d1a');
-        $(selectors.photo1).css('border', 'none');
-        $(selectors.photo3).css('border', 'none');
-        $(selectors.photo4).css('border', 'none');
+        counter = 1;
+        changes();
+        console.log(counter);
     });
     $(selectors.photo3).click(function() {
-        $(selectors.bigPhoto).css('background-image', 'url(images/image-product-3.jpg)');
-        
-        $(selectors.photo1Img).css('opacity', 1);
-        $(selectors.photo2Img).css('opacity', 1);
-        $(selectors.photo3Img).css('opacity', 0.5);
-        $(selectors.photo4Img).css('opacity', 1);
-        
-        $(selectors.photo3).css('border', '2px solid #ff7d1a');
-        $(selectors.photo2).css('border', 'none');
-        $(selectors.photo1).css('border', 'none');
-        $(selectors.photo4).css('border', 'none');
+        counter = 2;
+        changes();
+        console.log(counter);
     });
     $(selectors.photo4).click(function() {
-        $(selectors.bigPhoto).css('background-image', 'url(images/image-product-4.jpg)');
-        
-        $(selectors.photo1Img).css('opacity', 1);
-        $(selectors.photo2Img).css('opacity', 1);
-        $(selectors.photo3Img).css('opacity', 1);
-        $(selectors.photo4Img).css('opacity', 0.5);
-       
-        $(selectors.photo4).css('border', '2px solid #ff7d1a');
-        $(selectors.photo2).css('border', 'none');
-        $(selectors.photo3).css('border', 'none');
-        $(selectors.photo1).css('border', 'none');
+        counter = 3;
+        changes();
+        console.log(counter);
     });
-
-    var badge = 0;
-
-
-    var count = 0;
 
     $(selectors.minus).click(function() {
         count --;
@@ -98,7 +71,6 @@ function product (){
         count ++;
         $(selectors.number).html(`${count}`);
     });
-
     $(selectors.add).click(function() {
         badge += count;
         $(selectors.badge).html(`${badge}`);
@@ -108,12 +80,104 @@ function product (){
         $(selectors.number).html(`${count}`);
     });
 
-    var params = 'width=' + screen.width + ', height=' + screen.height
-            + ', top=0, left=0'
-            + ',toolbar=no,scrollbars=no,status=no,menubar=no,fullscreen=yes';
+    $(selectors.bigPhoto).click(function() {
+        console.log(counter);
+        $(selectors.popupShadow).css('display', 'block');
+        $(selectors.popupContainer).css('display', 'block');
+    });
 
-    screenServiceFactory.windows[id] = window.open(location, id, params);
+    $(selectors.close).click(function() {
+            
+        $(selectors.popupShadow).css('display', 'none');
+        $(selectors.popupContainer).css('display', 'none');
+    
+    });
+    $(selectors.popupShadow).click(function() {
+            
+        $(selectors.popupShadow).css('display', 'none');
+        $(selectors.popupContainer).css('display', 'none');
+    
+    });
 
+    $(selectors.rightButton).click(function() {
 
+        if (counter < 3) {
+            counter++;
+            changes();
+        }
+        console.log(counter);
+        
+      });
+
+    $(selectors.leftButton).click(function() {
+        
+        if (counter > 0) {
+            counter--;
+            changes();
+        } 
+        console.log(counter);
+
+      });
+
+    var changes = () => {
+
+        if (counter === 0) {
+            $(selectors.slide).css('margin-left', '0');
+            $(selectors.bigPhoto).css('background-image', 'url(images/image-product-1.jpg)');
+        
+            $(selectors.photo1Img).css('opacity', 0.5);
+            $(selectors.photo2Img).css('opacity', 1);
+            $(selectors.photo3Img).css('opacity', 1);
+            $(selectors.photo4Img).css('opacity', 1);
+            
+            $(selectors.photo1).css('border', '2px solid #ff7d1a');
+            $(selectors.photo2).css('border', 'none');
+            $(selectors.photo3).css('border', 'none');
+            $(selectors.photo4).css('border', 'none');
+        }
+        else if (counter === 1) {
+            $(selectors.slide).css('margin-left', '-700px');
+            $(selectors.bigPhoto).css('background-image', 'url(images/image-product-2.jpg)');
+        
+            $(selectors.photo1Img).css('opacity', 1);
+            $(selectors.photo2Img).css('opacity', 0.5);
+            $(selectors.photo3Img).css('opacity', 1);
+            $(selectors.photo4Img).css('opacity', 1);
+            
+            $(selectors.photo2).css('border', '2px solid #ff7d1a');
+            $(selectors.photo1).css('border', 'none');
+            $(selectors.photo3).css('border', 'none');
+            $(selectors.photo4).css('border', 'none');
+        }
+        else if (counter === 2) {
+            $(selectors.slide).css('margin-left', '-1400px');
+            $(selectors.bigPhoto).css('background-image', 'url(images/image-product-3.jpg)');
+        
+            $(selectors.photo1Img).css('opacity', 1);
+            $(selectors.photo2Img).css('opacity', 1);
+            $(selectors.photo3Img).css('opacity', 0.5);
+            $(selectors.photo4Img).css('opacity', 1);
+            
+            $(selectors.photo3).css('border', '2px solid #ff7d1a');
+            $(selectors.photo2).css('border', 'none');
+            $(selectors.photo1).css('border', 'none');
+            $(selectors.photo4).css('border', 'none');    
+        }
+        else if (counter === 3) {
+            $(selectors.slide).css('margin-left', '-2100px');
+            $(selectors.bigPhoto).css('background-image', 'url(images/image-product-4.jpg)');
+        
+            $(selectors.photo1Img).css('opacity', 1);
+            $(selectors.photo2Img).css('opacity', 1);
+            $(selectors.photo3Img).css('opacity', 1);
+            $(selectors.photo4Img).css('opacity', 0.5);
+           
+            $(selectors.photo4).css('border', '2px solid #ff7d1a');
+            $(selectors.photo2).css('border', 'none');
+            $(selectors.photo3).css('border', 'none');
+            $(selectors.photo1).css('border', 'none');    
+        }
+        
+    }
 
 }
