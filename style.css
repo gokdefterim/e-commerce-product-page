@@ -49,10 +49,27 @@ header {
     height: 150px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.shopping {
+    display: flex;
+    align-items: start;
+    width: 40px;
+    margin-right: 60px;
 }
 
 .cart {
-    margin-right: 60px;
+
+}
+
+.badge {
+    background-color: #FFFFFF;
+    margin-top: -10px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-size: 10px;
+    padding: 2px 5px;
 }
 
 .profile {
@@ -83,6 +100,10 @@ main {
     margin-bottom: 40px;
 }
 
+.big-photo:hover {
+    cursor: pointer;
+}
+
 .small-photos {
     display: flex;
     justify-content: space-between;
@@ -102,8 +123,12 @@ main {
     overflow: hidden;
 }
 
+.small-photos div :hover {
+    cursor: pointer;
+}
+
 .photo1 {
-    border: 2px solid hsl(26, 100%, 55%);
+    border: 2px solid #ff7d1a;
 }
 
 .photo1 img {
@@ -190,10 +215,18 @@ h1 {
     color: hsl(26, 100%, 55%);
 }
 
+.minus:hover {
+    cursor: pointer;
+}
+
 .plus {
     font-size: 32px;
     font-weight: 700;
     color: hsl(26, 100%, 55%);
+}
+
+.plus:hover {
+    cursor: pointer;
 }
 
 .number {
@@ -212,6 +245,10 @@ h1 {
     box-shadow: 0 35px 60px -30px hsl(26, 100%, 55%);
 }
 
+.add:hover {
+    cursor: pointer;
+}
+
 .shopping-cart {
     margin-right: 20px;
 }
@@ -220,4 +257,26 @@ h1 {
     color: #FFFFFF;
     font-size: 22px;
     font-weight: 700;
+}
+
+.popup-shadow {
+    display: none;
+    background:#000000;
+    position: fixed;
+    opacity: 0.7;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+    z-index: 1;
+}
+
+.pupup-container {
+    display: none;
+    position: fixed;
+    top: 135px;
+    margin: 0 345px;
+    width: 750px;
+    background-color: white;
+    z-index: 2;
 }
