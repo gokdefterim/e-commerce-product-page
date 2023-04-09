@@ -300,7 +300,7 @@ h1 {
 
 .popup-container {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 135px;
     margin: 0 345px;
     width: 750px;
