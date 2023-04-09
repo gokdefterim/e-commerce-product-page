@@ -64,8 +64,10 @@ function product (){
     });
 
     $(selectors.minus).click(function() {
-        count --;
-        $(selectors.number).html(`${count}`);
+        if (count > 0) {
+            count --;
+            $(selectors.number).html(`${count}`);
+        }
     });
     $(selectors.plus).click(function() {
         count ++;

@@ -34,10 +34,18 @@ header {
     height: 30px;
 }
 
+.logo:hover{
+    cursor: pointer;
+}
+
 .menu {
     display: flex;
     justify-content: space-between;
     gap: 45px;
+}
+
+.menu:hover{
+    cursor: pointer;
 }
 
 .menu p {
@@ -63,6 +71,10 @@ header {
     height: 30px;
 }
 
+.cart:hover{
+    cursor: pointer;
+}
+
 .badge {
     background-color: #FFFFFF;
     margin-top: -10px;
@@ -77,6 +89,10 @@ header {
     height: 70px;
     background-image: url(images/image-avatar.png);
     background-size: cover;
+}
+
+.profile:hover{
+    cursor: pointer;
 }
 
 main {
