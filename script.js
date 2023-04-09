@@ -124,7 +124,7 @@ function product (){
     var changes = () => {
 
         if (counter === 0) {
-            $(selectors.slide).css('margin-left', '0');
+            $(selectors.slide).css({'margin-left': '0' , 'transition': 'all 1s ease-in-out'});
             $(selectors.bigPhoto).css('background-image', 'url(images/image-product-1.jpg)');
         
             $(selectors.photo1Img).css('opacity', 0.5);
@@ -138,7 +138,7 @@ function product (){
             $(selectors.photo4).css('border', 'none');
         }
         else if (counter === 1) {
-            $(selectors.slide).css('margin-left', '-700px');
+            $(selectors.slide).css({'margin-left': '-700px', 'transition': 'all 1s ease-in-out'});
             $(selectors.bigPhoto).css('background-image', 'url(images/image-product-2.jpg)');
         
             $(selectors.photo1Img).css('opacity', 1);
@@ -152,7 +152,7 @@ function product (){
             $(selectors.photo4).css('border', 'none');
         }
         else if (counter === 2) {
-            $(selectors.slide).css('margin-left', '-1400px');
+            $(selectors.slide).css({'margin-left': '-1400px', 'transition': 'all 1s ease-in-out'});
             $(selectors.bigPhoto).css('background-image', 'url(images/image-product-3.jpg)');
         
             $(selectors.photo1Img).css('opacity', 1);
@@ -166,7 +166,7 @@ function product (){
             $(selectors.photo4).css('border', 'none');    
         }
         else if (counter === 3) {
-            $(selectors.slide).css('margin-left', '-2100px');
+            $(selectors.slide).css({'margin-left': '-2100px', 'transition': 'all 1s ease-in-out'});
             $(selectors.bigPhoto).css('background-image', 'url(images/image-product-4.jpg)');
         
             $(selectors.photo1Img).css('opacity', 1);
