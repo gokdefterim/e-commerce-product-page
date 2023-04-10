@@ -10,6 +10,7 @@ new Promise((resolve,reject)=>{
 function product (){
 
     var classes = {
+        body : 'body',
         bigPhoto : 'big-photo',
         photo1 : 'photo1',
         photo2 : 'photo2',
@@ -19,6 +20,7 @@ function product (){
         photo2Img : 'photo2-img',
         photo3Img : 'photo3-img',
         photo4Img : 'photo4-img',
+        thePrice : 'the-price',
         minus : 'minus',
         plus : 'plus',
         number : 'number',
@@ -41,7 +43,15 @@ function product (){
         mobBadge : 'mob-badge',
         mobLeftBut : 'mob-left-but',
         mobRightBut : 'mob-right-but',
-        mobSlide : 'mob-slide'
+        mobSlide : 'mob-slide',
+        cart : 'cart',
+        basket : 'basket',
+        body : 'body',
+        cartTitle : 'cart-title',
+        cartContent : 'cart-content',
+        cartEmpty : 'cart-empty',
+        cartTitleP : 'cart-title-p',
+        basketThumbnail : 'basket-thumbnail'
     }
 
     var selectors = {};
@@ -53,16 +63,30 @@ function product (){
     var badge = 0;
     var count = 0;
     var counter = 0;
+    var basketProducts;
+
+    $(classes.body).click(function(e){
+        var clickedElement = e.target.className;
+        console.log(clickedElement);
+        if (clickedElement === classes.cart ||
+            clickedElement === classes.cartTitle ||
+            clickedElement === classes.cartTitleP ||
+            clickedElement === classes.cartEmpty ||
+            clickedElement === classes.cartContent) {
+            $(selectors.basket).css('display', 'block');
+        }
+        else {
+            $(selectors.basket).css('display', 'none');
+        }
+    });
 
     $(selectors.photo1).click(function() {
         counter = 0;
         changes();
-        console.log(counter);
     });
     $(selectors.photo2).click(function() {
         counter = 1;
         changes();
-        console.log(counter);
     });
     $(selectors.photo3).click(function() {
         counter = 2;
@@ -87,12 +111,44 @@ function product (){
     });
     $(selectors.add).click(function() {
         badge += count;
+        console.log(badge);
         $(selectors.badge).html(`${badge}`);
         $(selectors.badge).css('background-color', '#FF0000');
 
         count = 0;
         $(selectors.number).html(`${count}`);
+
+        basketProducts = 
+        `<div class="basket-product">
+            <div class="basket-thumbnail"></div>
+            <div class="basket-info">
+                <p class="basket-title">${$('h1').html()}</p>    
+                <p class="basket-price">$${$(selectors.thePrice).html()} x` + badge + `</p>  '  
+            </div>
+            <img src="images/icon-delete.svg" alt="">
+        </div>`;
     });
+    
+    $(selectors.cart).click(function() {
+        if (badge == 0) {
+            $(selectors.basket).html("empty");
+        }
+        else {
+            console.log($(selectors.badge).html())
+            $(selectors.basket).html(basketProducts);
+        }
+        basketProducts = 
+        `<div class="basket-product">
+            <div class="basket-thumbnail"></div>
+            <div class="basket-info">
+                <p class="basket-title">${$('h1').html()}</p>    
+                <p class="basket-price">$${$(selectors.thePrice).html()} x` + badge + `</p>  '  
+            </div>
+            <img src="images/icon-delete.svg" alt="">
+        </div>`;
+    });
+
+
 
     $(selectors.bigPhoto).click(function() {
         console.log(counter);
@@ -249,4 +305,7 @@ function product (){
         
     }
 
+    (function initialize(){
+        setStyle();
+    })();
 }
