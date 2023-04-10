@@ -63,7 +63,7 @@ function product (){
     var badge = 0;
     var count = 0;
     var counter = 0;
-    var basketProducts;
+    var basketProductsHtml
 
     $(classes.body).click(function(e){
         var clickedElement = e.target.className;
@@ -118,34 +118,40 @@ function product (){
         count = 0;
         $(selectors.number).html(`${count}`);
 
-        basketProducts = 
+        basketProductsHtml = 
         `<div class="basket-product">
             <div class="basket-thumbnail"></div>
             <div class="basket-info">
                 <p class="basket-title">${$('h1').html()}</p>    
-                <p class="basket-price">$${$(selectors.thePrice).html()} x` + badge + `</p>  '  
+                <p class="basket-price">$${$(selectors.thePrice).html()} x ${badge} <b class="bold-price">$${($(selectors.thePrice).html()*badge).toFixed(2)}</b></p>  
             </div>
-            <img src="images/icon-delete.svg" alt="">
+            <img class="delete" src="images/icon-delete.svg" alt="">
         </div>`;
     });
     
     $(selectors.cart).click(function() {
         if (badge == 0) {
-            $(selectors.basket).html("empty");
+            $(selectors.basket).css('display', 'visible');
         }
         else {
+
+            var checkOut = 
+            `<div class="check-out">
+                <p class="check-out-button"> Checkout </p>
+            </div>`
+            
             console.log($(selectors.badge).html())
-            $(selectors.basket).html(basketProducts);
+            $(selectors.cartContent).html("");
+            $(selectors.cartContent).css('justify-content' , 'space-between');
+            $(selectors.cartContent).append(basketProductsHtml);
+
+            if (!!($('.check-out')[0])) {
+            }
+            else {
+                $(selectors.cartContent).after(checkOut);
+
+            }
         }
-        basketProducts = 
-        `<div class="basket-product">
-            <div class="basket-thumbnail"></div>
-            <div class="basket-info">
-                <p class="basket-title">${$('h1').html()}</p>    
-                <p class="basket-price">$${$(selectors.thePrice).html()} x` + badge + `</p>  '  
-            </div>
-            <img src="images/icon-delete.svg" alt="">
-        </div>`;
     });
 
 
