@@ -51,7 +51,15 @@ function product (){
         cartContent : 'cart-content',
         cartEmpty : 'cart-empty',
         cartTitleP : 'cart-title-p',
-        basketThumbnail : 'basket-thumbnail'
+        basketProduct : 'basket-product',
+        basketThumbnail : 'basket-thumbnail',
+        basketInfo : 'basket-info',
+        basketPrice : 'basket-price',
+        basketTitle : 'basket-title',
+        boldPrice : 'bold-price',
+        delete : 'delete',
+        checkOut : 'check-out',
+        checkOutButton : 'check-out-button'
     }
 
     var selectors = {};
@@ -63,7 +71,8 @@ function product (){
     var badge = 0;
     var count = 0;
     var counter = 0;
-    var basketProductsHtml
+    var basketProductsHtml;
+    var pageId = ($('h1').html()).replace(/\s/g , "");
 
     $(classes.body).click(function(e){
         var clickedElement = e.target.className;
@@ -72,7 +81,12 @@ function product (){
             clickedElement === classes.cartTitle ||
             clickedElement === classes.cartTitleP ||
             clickedElement === classes.cartEmpty ||
-            clickedElement === classes.cartContent) {
+            clickedElement === classes.cartContent ||
+            clickedElement === classes.basketThumbnail ||
+            clickedElement === classes.basketPrice ||
+            clickedElement === classes.basketTitle ||
+            clickedElement === classes.boldPrice ||
+            clickedElement.split(" ")[1] === classes.delete ) {
             $(selectors.basket).css('display', 'block');
         }
         else {
@@ -91,12 +105,10 @@ function product (){
     $(selectors.photo3).click(function() {
         counter = 2;
         changes();
-        console.log(counter);
     });
     $(selectors.photo4).click(function() {
         counter = 3;
         changes();
-        console.log(counter);
     });
 
     $(selectors.minus).click(function() {
@@ -111,7 +123,6 @@ function product (){
     });
     $(selectors.add).click(function() {
         badge += count;
-        console.log(badge);
         $(selectors.badge).html(`${badge}`);
         $(selectors.badge).css('background-color', '#FF0000');
 
@@ -119,13 +130,16 @@ function product (){
         $(selectors.number).html(`${count}`);
 
         basketProductsHtml = 
-        `<div class="basket-product">
-            <div class="basket-thumbnail"></div>
-            <div class="basket-info">
-                <p class="basket-title">${$('h1').html()}</p>    
-                <p class="basket-price">$${$(selectors.thePrice).html()} x ${badge} <b class="bold-price">$${($(selectors.thePrice).html()*badge).toFixed(2)}</b></p>  
+        `<div class="${classes.basketProduct} ${pageId}">
+            <div class="${classes.basketThumbnail}"></div>
+            <div class="${classes.basketInfo}">
+                <p class="${classes.basketTitle}">${$('h1').html()}</p>    
+                <p class="${classes.basketPrice}">
+                    $${$(selectors.thePrice).html()} x ${badge} 
+                    <b class="${classes.boldPrice}">$${($(selectors.thePrice).html()*badge).toFixed(2)}</b>
+                </p>  
             </div>
-            <img class="delete" src="images/icon-delete.svg" alt="">
+            <img class="${pageId} ${classes.delete}" src="images/icon-delete.svg" alt="">
         </div>`;
     });
     
@@ -135,12 +149,11 @@ function product (){
         }
         else {
 
-            var checkOut = 
-            `<div class="check-out">
-                <p class="check-out-button"> Checkout </p>
+            var checkOutHtml = 
+            `<div class="${classes.checkOut}">
+                <p class="${classes.checkOutButton}"> Checkout </p>
             </div>`
             
-            console.log($(selectors.badge).html())
             $(selectors.cartContent).html("");
             $(selectors.cartContent).css('justify-content' , 'space-between');
             $(selectors.cartContent).append(basketProductsHtml);
@@ -148,16 +161,32 @@ function product (){
             if (!!($('.check-out')[0])) {
             }
             else {
-                $(selectors.cartContent).after(checkOut);
-
+                $(selectors.cartContent).after(checkOutHtml);
             }
         }
+
+        $(selectors.delete).click(function(e) {
+
+            var deleted = e.target.className.split(" ")[0];
+            $(`.${deleted}`).remove();
+
+            $(selectors.basket).css('display', 'block');
+
+            if (!!($(selectors.basketThumbnail)[0])) {
+            }
+            else {
+                $(selectors.checkOut).remove();
+                $(selectors.cartContent).css('justify-content' , 'center');
+                $(selectors.cartContent).append(`<p class="${classes.cartEmpty}">Your cart is empty.</p>`);
+                badge = 0;
+                $(selectors.badge).html(``);
+                $(selectors.badge).css('background-color', '#FFFFFF');
+            }
+
+        })
     });
 
-
-
     $(selectors.bigPhoto).click(function() {
-        console.log(counter);
         $(selectors.popupShadow).css('display', 'block');
         $(selectors.popupContainer).css('display', 'block');
     });
@@ -283,7 +312,6 @@ function product (){
             counter++;
             mobChanges();
         }
-        console.log(counter);        
       });
 
     $(selectors.mobLeftBut).click(function() {   
@@ -291,7 +319,6 @@ function product (){
             counter--;
             mobChanges();
         } 
-        console.log(counter);
       });
 
       var mobChanges = () => {

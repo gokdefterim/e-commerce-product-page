@@ -170,9 +170,17 @@ header {
     height : 25px;
 }
 
+.delete:hover {
+    cursor: pointer;
+}
+
 .check-out {
     width: 100%;
     padding: 0 25px 25px 25px;
+}
+
+.check-out-button:hover {
+    cursor: pointer;
 }
 
 .check-out-button {
