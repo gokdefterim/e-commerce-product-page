@@ -30,6 +30,18 @@ function product (){
         popupShadow : 'popup-shadow',
         popupContainer : 'popup-container',
         close : 'close',
+        mobMenu : 'mob-menu',
+        mobSideBar : 'mob-side-bar',
+        mobClose : 'mob-close',
+        mobShadow : 'mob-shadow',
+        mobMinus : 'mob-minus',
+        mobPlus : 'mob-plus',
+        mobNumber : 'mob-number',
+        mobAdd : 'mob-add',
+        mobBadge : 'mob-badge',
+        mobLeftBut : 'mob-left-but',
+        mobRightBut : 'mob-right-but',
+        mobSlide : 'mob-slide'
     }
 
     var selectors = {};
@@ -102,23 +114,17 @@ function product (){
     });
 
     $(selectors.rightButton).click(function() {
-
         if (counter < 3) {
             counter++;
             changes();
         }
-        console.log(counter);
-        
       });
 
     $(selectors.leftButton).click(function() {
-        
         if (counter > 0) {
             counter--;
             changes();
         } 
-        console.log(counter);
-
       });
 
     var changes = () => {
@@ -178,6 +184,67 @@ function product (){
             $(selectors.photo2).css('border', 'none');
             $(selectors.photo3).css('border', 'none');
             $(selectors.photo1).css('border', 'none');    
+        }
+        
+    }
+
+    $(selectors.mobMenu).click(function() {
+        $(selectors.mobSideBar).css({'margin-left': '0', 'transition': 'all 1s ease-in-out'});
+        $(selectors.mobShadow).css('display', 'block');
+    })
+    $(selectors.mobClose).click(function() {
+        $(selectors.mobSideBar).css({'margin-left': '-70vw', 'transition': 'all 1s ease-in-out'});
+        $(selectors.mobShadow).css('display', 'none');
+    })
+
+    $(selectors.mobMinus).click(function() {
+        if (count > 0) {
+            count --;
+            $(selectors.mobNumber).html(`${count}`);
+        }
+    });
+    $(selectors.mobPlus).click(function() {
+        count ++;
+        $(selectors.mobNumber).html(`${count}`);
+    });
+    $(selectors.mobAdd).click(function() {
+        badge += count;
+        $(selectors.mobBadge).html(`${badge}`);
+        $(selectors.mobBadge).css('background-color', '#FF0000');
+
+        count = 0;
+        $(selectors.mobNumber).html(`${count}`);
+    });
+
+    $(selectors.mobRightBut).click(function() {
+        if (counter < 3) {
+            counter++;
+            mobChanges();
+        }
+        console.log(counter);        
+      });
+
+    $(selectors.mobLeftBut).click(function() {   
+        if (counter > 0) {
+            counter--;
+            mobChanges();
+        } 
+        console.log(counter);
+      });
+
+      var mobChanges = () => {
+
+        if (counter === 0) {
+            $(selectors.mobSlide).css({'margin-left': '0' , 'transition': 'all 1s ease-in-out'});        
+        }
+        else if (counter === 1) {
+            $(selectors.mobSlide).css({'margin-left': '-100vw', 'transition': 'all 1s ease-in-out'});
+        }
+        else if (counter === 2) {
+            $(selectors.mobSlide).css({'margin-left': '-200vw', 'transition': 'all 1s ease-in-out'});
+        }
+        else if (counter === 3) {
+            $(selectors.mobSlide).css({'margin-left': '-300vw', 'transition': 'all 1s ease-in-out'});
         }
         
     }
